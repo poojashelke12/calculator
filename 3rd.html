@@ -1,0 +1,294 @@
+<html>
+
+<head>
+    <title>Calculator</title>
+    <style>
+        #cust {
+            border-collapse: collapse;
+            width: 25%;
+            height: 70%;
+
+        }
+
+        input[type="button"] {
+            background-color: rgb(202, 199, 199);
+
+            width: 100%;
+            height: 100%;
+            font-size: 42px;
+            ;
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <center>
+        <table id="cust" border="1">
+            <tr>
+                <td colspan="4">
+                    <p
+                        style=" padding:0px; margin-bottom:0px; background-color:lightslategray ; color:white; font-size: 40px;  text-align: center; height: 100%;">
+                        <b>Calculator</b></p>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type="text" name="text1" disabled id="result"
+                        style="text-align: right;  color: black; width: 100%; height: 60px; font-size: 20px; padding-bottom: 0px; padding-top: 0px;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <form name="form1" style="margin-bottom:0px; ">
+                        <input type="text" name="text1" onfocus="this.value=''"
+                            style="text-align: right; color: black; width: 100%; height:60px; font-size: 25px; padding-bottom: 0px; padding-top: 0px;"
+                            id="demo" onkeyup="dis(document.form1.text1);" disabled />
+                    </form>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td colspan="2"><input type="button" style="background-color:lightslategray;" id="btn" value="on" onclick="on(); " />
+                </td>
+                
+                <td><input type="button" style="background-color:lightslategray;" id="bk" value="x" onclick="back()" disabled/>
+                </td>
+                <td ><input type="button" style="background-color:red;" id="cr"  value="C" onclick="clr()" disabled/> </td>
+                
+            </tr>
+
+            <tr>
+                <td><input type="button" style="background-color: orange;" id="op8" value="π" onclick="display('3.14')" disabled/> </td>
+                <td><input type="button" style="background-color: orange;" id="op7" value="lg" onclick="log1('lg')" disabled/> </td>
+                <td><input type="button" style="background-color: orange;" id="op6" value="^" onclick="power('^')" disabled/> </td>
+                <td><input type="button" style="background-color: orange;" id="op1" value="&#8730" onclick="root()" disabled/> </td>
+            </tr>
+
+
+            <tr>
+                 
+                <td> <input type="button" id="one4" value="7" onclick="displaynum('7')" disabled/> </td>
+                <td><input type="button" id="one3" value="8" onclick="displaynum('8')" disabled/> </td>
+                <td><input type="button" id="one2" value="9" onclick="displaynum('9')" disabled/> </td>
+                <td><input type="button" style="background-color: orange;" id="op5" value="+" onclick="display('+')"
+                        this.onclick=null; disabled/> </td>
+            </tr>
+
+            <tr>
+               
+                <td><input type="button" id="one7" value="4" onclick="displaynum('4')" disabled/> </td>
+                <td><input type="button" id="one6" value="5" onclick="displaynum('5')" disabled/> </td>
+                <td> <input type="button" id="one5" value="6" onclick="displaynum('6')" disabled/> </td>
+                <td><input type="button" style="background-color: orange;" id="op4" value="-" onclick="display('-')" disabled/> </td>
+                
+            </tr>
+
+            <tr>
+               
+                <td><input type="button" id="one10" value="1" onclick="displaynum('1')" disabled/> </td>
+                <td><input type="button" id="one9" value="2" onclick="displaynum('2')" disabled/> </td>
+                <td><input type="button" id="one8" value="3" onclick="displaynum('3')" disabled/> </td>
+                <td><input type="button" style="background-color: orange;" id="op3" value="/" onclick="display('/')" disabled/> </td>
+                
+            </tr>
+
+            <tr>
+                
+                
+                <td ><input type="button" id="one11" value="0" onclick="displaynum('0')" disabled/> </td>
+                <td><input type="button" id="one1" value="." onclick="displaynum('.')" disabled/> </td>
+
+                <td><input type="button" id="one12"  style="background-color: green;" value="="
+                        onclick="output(document.form1.text1)" disabled/> </td>
+                        <td><input type="button" style="background-color: orange;" id="op2" value="*" onclick="display('*')" disabled/> </td>
+            </tr>
+
+            
+
+        </table>
+    </center>
+
+
+    <script>
+        var y = '',result=false,  q = '';
+        flag=true;
+        function dis(inputtxt) {
+
+            inputtxt.value = inputtxt.value.replace(/[^ ]/g, "");
+
+            document.getElementById("demo").innerHTML = inputtxt.value;
+
+        }
+
+        function display(val) {
+
+
+            let p = val;
+            let q = document.getElementById("demo").value;
+            let r = q + p;
+
+            document.getElementById("demo").value = r;
+
+
+
+        }
+
+        function displaynum(val) {
+
+              let r='';
+              let p = val;
+             q = document.getElementById("demo").value;
+             
+             if(y != ''){
+                if( q.match(/.*['*^+-\/'].*$/g)){
+                    r = q + p;
+                    console.log("dsf1");
+
+                }else {
+                    console.log("dsf");
+
+                  if(result){
+                        r = p;
+                        result = false;
+                    }else {
+                        r = q + p;
+                    }
+                }
+            }else{
+                r = q + p;
+            }
+            document.getElementById("demo").value = r;
+        }
+
+
+
+        function root(){
+            
+            
+            let x = document.getElementById("demo").value;
+           
+            y =  eval( Math.sqrt(x));
+           
+            document.getElementById("demo").value = y;
+        
+            console.log(y);
+            document.getElementById("result").value ="√"+x;
+            
+            result=true;
+            
+        }
+        
+        function power(){
+            
+            
+            let x = document.getElementById("demo").value;
+        
+            document.getElementById("demo").value = x+"^";
+        
+            result=true;
+            
+        }
+        
+        function log1(){
+            
+            
+            let x = document.getElementById("demo").value;
+           
+            y =  eval( Math.log10(x));
+        
+            document.getElementById("demo").value = y;
+        
+            console.log(y);
+            document.getElementById("result").value =  "log("+x+")";
+            
+            result=true;
+            
+        }
+        function output() {
+            
+            
+            let x = document.getElementById("demo").value;
+            if(x != ''){
+            q = document.getElementById("demo").value;
+            if( q.match(/.*['^'].*$/g)){
+                 q=q.split("^");
+                 console.log(q);
+                 let a= q[0];
+                 let b= q[1];
+                 y=Math.pow(a,b);
+                 
+            }
+            else{
+            y =  eval(x);
+            }
+        
+            document.getElementById("demo").value = y;
+        
+            console.log(y);
+            document.getElementById("result").value = x;
+            
+            result=true;
+        }
+        
+        }
+        
+
+        function back() {
+            var a = document.getElementById("demo").value;
+
+            document.getElementById("demo").value = a.substr(0, a.length - 1);
+        }
+
+
+        function clr() {
+            document.getElementById("demo").value = '';
+            document.getElementById("result").value = '';
+            console.log(y);
+        } 
+
+        function on() {
+            
+            
+            flag=!flag;
+            if(flag){
+                document.getElementById("btn").value="on";
+            }
+            else{
+                document.getElementById("btn").value="off";
+            }
+            
+            document.getElementById("demo").disabled = flag; 
+            document.getElementById("one1").disabled = flag; 
+            document.getElementById("one2").disabled = flag; 
+            document.getElementById("one3").disabled = flag; 
+            document.getElementById("one4").disabled = flag; 
+            document.getElementById("one5").disabled = flag; 
+            document.getElementById("one6").disabled = flag; 
+            document.getElementById("one7").disabled = flag; 
+            document.getElementById("one8").disabled = flag; 
+            document.getElementById("one9").disabled = flag; 
+            document.getElementById("one10").disabled = flag; 
+            document.getElementById("one11").disabled = flag; 
+            document.getElementById("one12").disabled = flag; 
+            document.getElementById("op1").disabled = flag; 
+            document.getElementById("op2").disabled = flag; 
+            document.getElementById("op3").disabled = flag; 
+            document.getElementById("op4").disabled = flag; 
+            document.getElementById("op5").disabled = flag; 
+            document.getElementById("op6").disabled = flag; 
+            document.getElementById("op7").disabled = flag; 
+            document.getElementById("op8").disabled = flag; 
+            document.getElementById("bk").disabled = flag; 
+            document.getElementById("cr").disabled = flag; 
+                     
+        
+    }
+    </script>
+</body>
+
+</html>
