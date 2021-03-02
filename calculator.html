@@ -1,24 +1,102 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width , initial-scale=1"> 
+    <meta charset="UTF-8">
     <title>Calculator</title>
     <style>
+       .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+     }
+
+     .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+     position: absolute;
+     cursor: pointer;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+
+   .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+   -webkit-transition: .4s;
+    transition: .4s;
+ }
+
+   input:checked + .slider {
+    background-color: #2196F3;
+   }
+
+   input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+ }
+
+   /* Rounded sliders */
+  .slider.round {
+   border-radius: 34px;
+  }
+
+  .slider.round:before {
+   border-radius: 50%;
+   }
+
+
+
         #cust {
             border-collapse: collapse;
             width: 25%;
             height: 70%;
+            border: none;
+            background-color: #212121;
 
         }
 
         input[type="button"] {
-            background-color: rgb(202, 199, 199);
+           
+            padding: 10px;
+            border-radius: 30px;
+            width: 70px;
+            height: 70px;
+            font-size: 20px;
+            border: none;
+            margin-top: 5px;
+           
+        
+        }    
+        input[type="button"]:hover{
+            opacity: 0.6;}    
 
-            width: 100%;
-            height: 100%;
-            font-size: 42px;
-            ;
-
+        
+        
+        td{
+            text-align: center;
         }
+
     </style>
 </head>
 
@@ -26,98 +104,100 @@
 <body>
 
     <center>
-        <table id="cust" border="1">
+        <table id="cust" border="0">
             <tr>
                 <td colspan="4">
-                    <p
-                        style=" padding:0px; margin-bottom:0px; background-color:lightslategray ; color:white; font-size: 40px;  text-align: center; height: 100%;">
-                        <b>Calculator</b></p>
-                </td>
-
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <input type="text" name="text1" disabled id="result"
-                        style="text-align: right;  color: black; width: 100%; height: 60px; font-size: 20px; padding-bottom: 0px; padding-top: 0px;" />
+                    <textarea name="text1" rows="2" cols="20" disabled id="result"
+                        style="text-align: right; background-color: #2b292a; color: white; width: 100%; height: 60px; font-size: 25px; padding-bottom: 0px; margin-bottom: 0px; padding-top: 0px; margin-top: 0px;" this.onclick=null; disabled></textarea>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <form name="form1" style="margin-bottom:0px; ">
-                        <input type="text" name="text1" onfocus="this.value=''"
-                            style="text-align: right; color: black; width: 100%; height:60px; font-size: 25px; padding-bottom: 0px; padding-top: 0px;"
-                            id="demo" onkeyup="dis(document.form1.text1);" disabled />
-                    </form>
+                   <form name="form1" style="margin-bottom:0px; ">
+                        <textarea name="text1" rows="2" cols="20" onfocus="this.value=''"
+                            style="text-align: right; border: none; background-color: #2b292a; color: white;; width: 100%; height:auto; font-size:35px; padding-bottom: 0px; margin-bottom: 0px; padding-top: 0px; margin-top: 0px;"
+                            id="demo" onkeyup="dis(document.form1.text1); " disabled ></textarea>
+                    </form>    
                 </td>
-
             </tr>
 
             <tr>
-                <td colspan="2"><input type="button" style="background-color:lightslategray;" id="btn" value="on" onclick="on(); " />
+                <td > <label class="switch">
+                    <input type="checkbox"  id="btn" onclick="on(); " >
+                    <span class="slider round"></span>
+                  </label> 
                 </td>
+                <!--<td ><input type="button" style=" background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 30px;" id="btn" value="on" onclick="on(); " />
+                </td>-->
+
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 25px;" id="op7" value="lg" onclick="log1('lg')" disabled/> </td>
                 
-                <td><input type="button" style="background-color:lightslategray;" id="bk" value="x" onclick="back()" disabled/>
-                </td>
-                <td ><input type="button" style="background-color:red;" id="cr"  value="C" onclick="clr()" disabled/> </td>
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 30px;"  id="op9" value="e" onclick="display('2.7182')" disabled/> </td>
+                <td ><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 3s0px;" id="cr"  value="C" onclick="clr()" disabled/> </td>
                 
             </tr>
 
             <tr>
-                <td><input type="button" style="background-color: orange;" id="op8" value="π" onclick="display('3.14')" disabled/> </td>
-                <td><input type="button" style="background-color: orange;" id="op7" value="lg" onclick="log1('lg')" disabled/> </td>
-                <td><input type="button" style="background-color: orange;" id="op6" value="^" onclick="power('^')" disabled/> </td>
-                <td><input type="button" style="background-color: orange;" id="op1" value="&#8730" onclick="root()" disabled/> </td>
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 30px;"  id="op8" value="π" onclick="display('3.14')" disabled/> </td>
+               
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 35px;" id="op6" value="^" onclick="power('^')" disabled/> </td>
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 28px;" id="op1" value="√" onclick="root()" disabled/> </td>
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 35px;" id="op5" value="+" onclick="display('+')" disabled/></td>
             </tr>
 
 
             <tr>
                  
-                <td> <input type="button" id="one4" value="7" onclick="displaynum('7')" disabled/> </td>
-                <td><input type="button" id="one3" value="8" onclick="displaynum('8')" disabled/> </td>
-                <td><input type="button" id="one2" value="9" onclick="displaynum('9')" disabled/> </td>
-                <td><input type="button" style="background-color: orange;" id="op5" value="+" onclick="display('+')"
-                        this.onclick=null; disabled/> </td>
+                <td> <input type="button" style="background-color:#343434; color:white;" id="one4" value="7" onclick="displaynum('7')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white;" id="one3" value="8" onclick="displaynum('8')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white;" id="one2" value="9" onclick="displaynum('9')" disabled/> </td>
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 42px;" id="op4" value="-" onclick="display('-')" disabled/> </td>
+                        
             </tr>
 
             <tr>
                
-                <td><input type="button" id="one7" value="4" onclick="displaynum('4')" disabled/> </td>
-                <td><input type="button" id="one6" value="5" onclick="displaynum('5')" disabled/> </td>
-                <td> <input type="button" id="one5" value="6" onclick="displaynum('6')" disabled/> </td>
-                <td><input type="button" style="background-color: orange;" id="op4" value="-" onclick="display('-')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white;" id="one7" value="4" onclick="displaynum('4')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white;" id="one6" value="5" onclick="displaynum('5')" disabled/> </td>
+                <td> <input type="button" style="background-color:#343434; color:white;" id="one5" value="6" onclick="displaynum('6')" disabled/> </td>
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 20px;" id="op2" value="✱" onclick="display('*')" disabled/> </td>
                 
             </tr>
 
             <tr>
                
-                <td><input type="button" id="one10" value="1" onclick="displaynum('1')" disabled/> </td>
-                <td><input type="button" id="one9" value="2" onclick="displaynum('2')" disabled/> </td>
-                <td><input type="button" id="one8" value="3" onclick="displaynum('3')" disabled/> </td>
-                <td><input type="button" style="background-color: orange;" id="op3" value="/" onclick="display('/')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white;" id="one10" value="1" onclick="displaynum('1')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white;" id="one9" value="2" onclick="displaynum('2')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white;" id="one8" value="3" onclick="displaynum('3')" disabled/> </td>
+                <td><input type="button" style="background-image: linear-gradient(#1d4350, #1b3544); color:white; font-size: 40px;" id="op3" value="÷" onclick="display('/')" disabled/> </td>
                 
             </tr>
 
             <tr>
                 
                 
-                <td ><input type="button" id="one11" value="0" onclick="displaynum('0')" disabled/> </td>
-                <td><input type="button" id="one1" value="." onclick="displaynum('.')" disabled/> </td>
-
-                <td><input type="button" id="one12"  style="background-color: green;" value="="
-                        onclick="output(document.form1.text1)" disabled/> </td>
-                        <td><input type="button" style="background-color: orange;" id="op2" value="*" onclick="display('*')" disabled/> </td>
+                <td ><input type="button" style="background-color:#343434; color:white; margin-bottom: 10px;" id="one11" value="0" onclick="displaynum('0')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white; margin-bottom: 10px;" id="one1" value="." onclick="displaynum('.')" disabled/> </td>
+                <td><input type="button" style="background-color:#343434; color:white; margin-bottom: 10px;" id="bk" value="x" onclick="back()" disabled/>
+                </td>
+                <td><input type="button" id="one12"  style="font-size:30px; background-image: linear-gradient( #02f2ee,#01dad7, #016364);  color:white; margin-bottom: 10px;" value="="
+                    onclick="output(document.form1.text1)" disabled/> </td>              
             </tr>
 
             
 
         </table>
+        
     </center>
 
 
     <script>
         var y = '',result=false,  q = '';
         flag=true;
+       
+      
         function dis(inputtxt) {
+            
 
             inputtxt.value = inputtxt.value.replace(/[^ ]/g, "");
 
@@ -127,15 +207,20 @@
 
         function display(val) {
 
-
+            
             let p = val;
+            
             let q = document.getElementById("demo").value;
+            if(q.match(/.*['0-9'].*$/g)){
+
             let r = q + p;
-
+            
             document.getElementById("demo").value = r;
+        
+            }else{
 
-
-
+            }
+            
         }
 
         function displaynum(val) {
@@ -147,10 +232,10 @@
              if(y != ''){
                 if( q.match(/.*['*^+-\/'].*$/g)){
                     r = q + p;
-                    console.log("dsf1");
+                    
 
                 }else {
-                    console.log("dsf");
+                    
 
                   if(result){
                         r = p;
@@ -226,11 +311,13 @@
             else{
             y =  eval(x);
             }
-        
+            
+         
             document.getElementById("demo").value = y;
+            
         
             console.log(y);
-            document.getElementById("result").value = x;
+            document.getElementById("result").value = x+"=";
             
             result=true;
         }
@@ -256,10 +343,10 @@
             
             flag=!flag;
             if(flag){
-                document.getElementById("btn").value="on";
+               // document.getElementById("btn").value="on";
             }
             else{
-                document.getElementById("btn").value="off";
+               // document.getElementById("btn").value="off";
             }
             
             document.getElementById("demo").disabled = flag; 
@@ -283,6 +370,7 @@
             document.getElementById("op6").disabled = flag; 
             document.getElementById("op7").disabled = flag; 
             document.getElementById("op8").disabled = flag; 
+            document.getElementById("op9").disabled = flag; 
             document.getElementById("bk").disabled = flag; 
             document.getElementById("cr").disabled = flag; 
                      
